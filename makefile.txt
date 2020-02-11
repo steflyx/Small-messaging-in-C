@@ -1,0 +1,18 @@
+CFLAGS = -Wall
+
+all: server client
+
+server: server.o funzioniConnessione.o
+	$(CC) $(CFLAGS) server.o funzioniConnessione.o -pthread -o server
+
+server.o: server.c funzioniConnessione.h costanti.h
+	$(CC) $(CFLAGS) -c server.c -pthread
+
+client: client.o funzioniConnessione.o
+	$(CC) $(CFLAGS) client.o funzioniConnessione.o -o client
+
+client.o: client.c funzioniConnessione.h costanti.h
+	$(CC) $(CFLAGS) -c client.c
+
+funzioniConnessione.o: funzioniConnessione.c funzioniConnessione.h
+	$(CC) $(CFLAGS) -c funzioniConnessione.c
